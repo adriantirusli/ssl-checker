@@ -1,5 +1,7 @@
 # ssl-checker
 
+Check SSL Certificate expiration.
+
 ## Usage
 
 - Build

@@ -7,15 +7,21 @@ import (
 	certs "github.com/adriantirusli/ssl-checker"
 )
 
+var (
+	port	string
+	addr 	string
+)
+
 func main() {
-	addr := os.Args[1]
+	arg := os.Args[1]
+	port = "443"
 
 	var (
 		c   *certs.Cert
 		err error
 	)
 
-	addr = addr + ":" + "443" 
+	addr = arg + ":" + port 
 
 	if addr != "" {
 		c, err = certs.ParseRemoteCertificate(addr)

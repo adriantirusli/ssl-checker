@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-//Cert is
+//Cert are collections of field
 type Cert struct {
 	CommonName         string    `json:"cn"`
 	NotAfter           time.Time `json:"not_after"`
@@ -20,7 +20,7 @@ type Cert struct {
 	ExpireAfter        float64   `json:"expiration"`
 }
 
-//getVerifiedCertificateChains is
+//getVerifiedCertificateChains is to connects to the given network address using dialer
 func getVerifiedCertificateChains(addr string, timeoutSecond time.Duration) ([][]*x509.Certificate, error) {
 	conn, err := tls.DialWithDialer(&net.Dialer{Timeout: timeoutSecond * time.Second}, "tcp", addr, nil)
 	if err != nil {
@@ -32,7 +32,7 @@ func getVerifiedCertificateChains(addr string, timeoutSecond time.Duration) ([][
 	return chains, nil
 }
 
-//ParseRemoteCertificate is
+//ParseRemoteCertificate is to return the resulting TLS connection
 func ParseRemoteCertificate(addr string) (*Cert, error) {
 	chains, err := getVerifiedCertificateChains(addr, time.Duration(30))
 	if err != nil {
@@ -59,7 +59,7 @@ func ParseRemoteCertificate(addr string) (*Cert, error) {
 	return cert, err
 }
 
-//Jsonify is
+//Jsonify used to change the format given to JSON
 func (cert *Cert) Jsonify() string {
 	b, _ := json.Marshal(cert)
 	return string(b)
